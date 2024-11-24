@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 
 import './App.css';
 import ContactList from './components/ContactList/ContactList';
@@ -23,7 +24,21 @@ function App() {
 	}, [contacts]);
 
 	const handleAddContact = (newContact) => {
-		setContacts((prevContacts) => [...prevContacts, newContact]);
+	
+	const contactWithId = { ...newContact, id: nanoid() };
+
+    const isDuplicate = contacts.some(
+		(contact) =>
+			contact.name.toLowerCase() === contactWithId.name.toLowerCase() ||
+			contact.number === contactWithId.number
+	);
+
+    if (isDuplicate) {
+        alert('Contact with this name or number already exists!');
+        return;
+	}
+		
+    setContacts((prevContacts) => [...prevContacts, contactWithId]);
 	};
 
 	const handleDeleteContact = (id) => {
@@ -33,7 +48,8 @@ function App() {
 	};
 
 	const filteredContacts = contacts.filter((contact) =>
-		contact.name.toLowerCase().includes(filter.toLowerCase())
+		contact.name.toLowerCase().includes(filter.toLowerCase()) ||
+		contact.number.includes(filter)
 	);
 
 	return (

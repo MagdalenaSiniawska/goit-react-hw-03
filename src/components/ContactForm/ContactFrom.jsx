@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useId } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 import styles from './ContactForm.module.css';
 
@@ -21,14 +21,21 @@ const initialValues = {
 	number: '',
 };
 
-const ContactForm = ({ onAdd }) => {
-	const nameFieldId = useId();
-	const numberFieldId = useId();
-	const contactId = nanoid();
+	// const ContactForm = ({ onAdd }) => {
+	// const nameFieldId = useId();
+	// const numberFieldId = useId();
+	// const contactId = nanoid();
 
+	// const handleSubmit = (values, actions) => {
+	// 	const newContact = { ...values, id: contactId };
+	// 	onAdd(newContact);
+	// 	actions.setSubmitting(false);
+	// 	actions.resetForm();
+	// };
+
+	const ContactForm = ({ onAdd }) => {
 	const handleSubmit = (values, actions) => {
-		const newContact = { ...values, id: contactId };
-		onAdd(newContact);
+		onAdd(values); // ID nie jest już tworzone tutaj, tylko w App [ZMIANA]
 		actions.setSubmitting(false);
 		actions.resetForm();
 	};
