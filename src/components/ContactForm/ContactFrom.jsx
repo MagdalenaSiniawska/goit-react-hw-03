@@ -1,7 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useId } from 'react';
-// import { nanoid } from 'nanoid';
 
 import styles from './ContactForm.module.css';
 
@@ -21,21 +20,12 @@ const initialValues = {
 	number: '',
 };
 
-	// const ContactForm = ({ onAdd }) => {
-	// const nameFieldId = useId();
-	// const numberFieldId = useId();
-	// const contactId = nanoid();
+const ContactForm = ({ onAdd }) => {
+	const nameFieldId = useId();
+	const numberFieldId = useId();
 
-	// const handleSubmit = (values, actions) => {
-	// 	const newContact = { ...values, id: contactId };
-	// 	onAdd(newContact);
-	// 	actions.setSubmitting(false);
-	// 	actions.resetForm();
-	// };
-
-	const ContactForm = ({ onAdd }) => {
 	const handleSubmit = (values, actions) => {
-		onAdd(values); // ID nie jest już tworzone tutaj, tylko w App [ZMIANA]
+		onAdd(values);
 		actions.setSubmitting(false);
 		actions.resetForm();
 	};
@@ -54,14 +44,14 @@ const initialValues = {
 					<div className={styles.formInputWrapper}>
 						<Field
 							className={styles.formInput}
-							type='text'
-							name='name'
+							type="text"
+							name="name"
 							id={nameFieldId}
 						/>
 						<ErrorMessage
 							className={styles.formErrorMessage}
-							name='name'
-							component='div'
+							name="name"
+							component="div"
 						/>
 					</div>
 
@@ -71,21 +61,21 @@ const initialValues = {
 					<div className={styles.formInputWrapper}>
 						<Field
 							className={styles.formInput}
-							type='tel'
-							inputMode='tel'
-							name='number'
+							type="tel"
+							inputMode="tel"
+							name="number"
 							id={numberFieldId}
 						/>
 						<ErrorMessage
 							className={styles.formErrorMessage}
-							name='number'
-							component='div'
+							name="number"
+							component="div"
 						/>
 					</div>
 
 					<button
 						className={styles.formButton}
-						type='submit'
+						type="submit"
 						disabled={isSubmitting}
 					>
 						Add contact
